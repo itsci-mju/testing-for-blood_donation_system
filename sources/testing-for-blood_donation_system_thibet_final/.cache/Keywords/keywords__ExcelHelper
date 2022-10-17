@@ -1,0 +1,103 @@
+{
+  "keywordFileContentHash": "602222B2B13DA95A46AAC6A7214029AF",
+  "keywordClasses": [
+    {
+      "name": "keywords.ExcelHelper",
+      "keywordMethods": [
+        {
+          "name": "xlRead",
+          "parameters": [
+            {
+              "name": "sPath",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "sheetNo",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "int",
+                "unresolvedClassName": "int",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": true,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ],
+          "javadoc": ""
+        },
+        {
+          "name": "xlWrite",
+          "parameters": [
+            {
+              "name": "xlPath",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "xldata",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "",
+                "unresolvedClassName": "",
+                "isArray": true,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "componentType": {
+                  "fullClassName": "",
+                  "unresolvedClassName": "",
+                  "isArray": true,
+                  "isGnericsPlaceHolder": false,
+                  "hasImmutableClassName": false,
+                  "componentType": {
+                    "fullClassName": "java.lang.String",
+                    "unresolvedClassName": "String",
+                    "isArray": false,
+                    "isGnericsPlaceHolder": false,
+                    "hasImmutableClassName": false,
+                    "genericsTypes": [],
+                    "errorOnParsing": false
+                  },
+                  "genericsTypes": [],
+                  "errorOnParsing": false
+                },
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ],
+          "javadoc": ""
+        },
+        {
+          "name": "getxRows",
+          "parameters": [],
+          "javadoc": ""
+        },
+        {
+          "name": "getxCols",
+          "parameters": [],
+          "javadoc": ""
+        }
+      ]
+    }
+  ],
+  "javadocParsed": true
+}
