@@ -12,10 +12,10 @@ public class StartUp {
 		String xTCdata[][]; 
 		String vKeyword, vIP1, vIP2, vIP3;
 		
-		String xlPath_tc = "C:/Users/Asus/Desktop/Project_Test/TC01_Search-Activity-Donation/TC01_Search-Activity-Donation_Result.xlsx";
-		String xlPath_ts = "C:/Users/Asus/Desktop/Project_Test/TC01_Search-Activity-Donation/TS01_Search-Activity-Donation_Result.xlsx";
-		String xlPath_td = "C:/Users/Asus/Desktop/Project_Test/TC01_Search-Activity-Donation/TD01_Search-Activity-Donation_Result.xlsx";
-	    String xlPath ="C:/Users/Asus/Desktop/Project_Test/TC01_Search-Activity-Donation/TC01_Search-Activity-Donation_Data.xlsx";
+		String xlPath_tc = "C:/Users/Asus/Desktop/Project_Test/TC01_Search-Activity-Donation/Documents/TC01_Search-Activity-Donation_Result.xlsx";
+		String xlPath_ts = "C:/Users/Asus/Desktop/Project_Test/TC01_Search-Activity-Donation/Documents/TS01_Search-Activity-Donation_Result.xlsx";
+		String xlPath_td = "C:/Users/Asus/Desktop/Project_Test/TC01_Search-Activity-Donation/Documents/TD01_Search-Activity-Donation_Result.xlsx";
+	    String xlPath ="C:/Users/Asus/Desktop/Project_Test/TC01_Search-Activity-Donation/Documents/TC01_Search-Activity-Donation_Data.xlsx";
 
 		Driver myDriver = new Driver();
 		
@@ -49,7 +49,6 @@ public class StartUp {
 	                		
 	                		if(vResult.equalsIgnoreCase("Pass")) {
 	                			xTSdata[j][8] = "Pass";
-	                			xTSdata[k][9] = vError;
 	                		}else if(vResult.equalsIgnoreCase("Fail")) {
 	                			xTSdata[j][8] = "Fail";
 	                		}else {
@@ -60,73 +59,109 @@ public class StartUp {
 
 										xTDdata[k][7] = vResult;
 										xTDdata[k][8] = "Pass";
+										
+										System.out.println("-------------------------------------");
+										System.out.println("Expected Result : " + xTDdata[k][6]);
+										System.out.println("Actual Result : " + vResult);
+										System.out.println("Pass!!!");
+										System.out.println("-------------------------------------");
+										
 										xTDdata[k][9] = vError;
 										xTDdata[k][10] = "-";
 										xTDdata[k][11] = "-";
 									}else {
-										if(xTDdata[k][4].equals("�ѹ���")) {
+										if(xTDdata[k][4].equals("วันที่")) {
 											
-											if(!vResult.equalsIgnoreCase(xTDdata[k][6])) {
-												xTSdata[j][9] = vError;
-												
-												xTDdata[k][7] = vResult;
-												xTDdata[k][8] = "Fail";
-												xTDdata[k][9] = vError;
-												
-												String nameimg = myDriver.getUtility().saveScreen(xTDdata[k][0]);
-												xTDdata[k][10] = nameimg;
-												xTDdata[k][11] = "���ͧ�ҡ �óշ��ͺ����Ѻ��÷��ͺ���ç�Ѻ���Ѿ����Ҵ���";
-												}
+//											if(!vResult.equalsIgnoreCase(xTDdata[k][6])) {
+//												xTSdata[j][9] = vError;
+//												
+//												xTDdata[k][7] = vResult;
+//												xTDdata[k][8] = "Fail";
+//												
+//												System.out.println("Expected Result : " + xTDdata[k][6]);
+//												System.out.println("Actual Result : " + vResult);
+//												System.out.println("Fail!!!");
+//												
+//												xTDdata[k][9] = vError;
+//												
+//												String nameimg = myDriver.getUtility().saveScreen(xTDdata[k][0]);
+//												xTDdata[k][10] = nameimg;
+//												xTDdata[k][11] = "เนื่องจาก กรณีทดสอบสำหรับการทดสอบไม่ตรงกับผลลัพธ์ที่คาดไว้";
+//												}
 											
 											String txt_day = "";
-											int day = 0;
-											int num = 0;
-												
+											String day = "";
 											txt_day = vResult;
 											String[] arrA = txt_day.split(" ");
 												
-											day = Integer.parseInt(arrA[0]);
+											day = arrA[0];
 											System.out.println("Result Day : " + txt_day);
 											System.out.println("Result Day Split : " + day);
-												
-											num =  Integer.parseInt(xTDdata[k][5]);
 											
-											if(num <= day) {
+											if(day.equals(xTDdata[k][5])) {
 												xTSdata[j][9] = vError;
 												
 												xTDdata[k][7] = vResult;
 												xTDdata[k][8] = "Pass";
+
+												System.out.println("-------------------------------------");
+												System.out.println("Expected Result : " + xTDdata[k][5]);
+												System.out.println("Actual Result : " + vResult);
+												System.out.println("Pass!!!");
+												System.out.println("-------------------------------------");
+												
 												xTDdata[k][9] = vError;
 												xTDdata[k][10] = "-";
-												xTDdata[k][11] = "�к��ӡ���ʴ� �ѹ���Ԩ����㹡�ú�ԨҤ���Ե��١��ͧ";	
+												xTDdata[k][11] = "ระบบทำการแสดง วันที่กิจกรรมในการบริจาคโลหิตได้ถูกต้อง";	
 											}else {
 												xTSdata[j][9] = vError;
 												
 												xTDdata[k][7] = vResult;
 												xTDdata[k][8] = "Fail";
+
+												System.out.println("-------------------------------------");
+												System.out.println("Expected Result : " + xTDdata[k][6]);
+												System.out.println("Actual Result : " + vResult);
+												System.out.println("Fail!!!");
+												System.out.println("-------------------------------------");
+												
 												xTDdata[k][9] = vError;
 												
 												String nameimg = myDriver.getUtility().saveScreen(xTDdata[k][0]);
 												xTDdata[k][10] = nameimg;
-												xTDdata[k][11] = "���ͧ�ҡ �ѹ������������㹪�ǧ�����ҧ�ѹ����ԨҤ���Ե";
+												xTDdata[k][11] = "เนื่องจาก กรณีทดสอบสำหรับการทดสอบไม่ตรงกับผลลัพธ์ที่คาดไว้";
 											}
-										}else if(xTDdata[k][4].equals("ʶҹ���")) {
+										}else if(xTDdata[k][4].equals("สถานที่")) {
 											if(vResult.equalsIgnoreCase(xTDdata[k][6])) {
 												xTSdata[j][9] = vError;
 
 												xTDdata[k][7] = vResult;
 												xTDdata[k][8] = "Pass";
+
+												System.out.println("-------------------------------------");
+												System.out.println("Expected Result : " + xTDdata[k][6]);
+												System.out.println("Actual Result : " + vResult);
+												System.out.println("Pass!!!");
+												System.out.println("-------------------------------------");
+												
 												xTDdata[k][9] = vError;
 												xTDdata[k][10] = "-";
-												xTDdata[k][11] = "�к��ӡ���ʴ� ʶҹ���Ԩ����㹡�ú�ԨҤ���Ե��١��ͧ";
+												xTDdata[k][11] = "ระบบทำการแสดง สถานที่กิจกรรมในการบริจาคโลหิตได้ถูกต้อง";
 											}else if(vResult.equalsIgnoreCase(xTDdata[k][5])){
 												xTSdata[j][9] = vError;
 
 												xTDdata[k][7] = vResult;
 												xTDdata[k][8] = "Pass";
+
+												System.out.println("-------------------------------------");
+												System.out.println("Expected Result : " + xTDdata[k][5]);
+												System.out.println("Actual Result : " + vResult);
+												System.out.println("Pass!!!");
+												System.out.println("-------------------------------------");
+												
 												xTDdata[k][9] = vError;
 												xTDdata[k][10] = "-";
-												xTDdata[k][11] = "�к��ӡ���ʴ� ʶҹ���Ԩ����㹡�ú�ԨҤ���Ե��١��ͧ";
+												xTDdata[k][11] = "ระบบทำการแสดง สถานที่กิจกรรมในการบริจาคโลหิตได้ถูกต้อง";
 //											}else if(!vResult.equalsIgnoreCase(xTDdata[k][5])){
 //													xTSdata[j][9] = vError;
 //													
@@ -136,28 +171,42 @@ public class StartUp {
 //													
 //													String nameimg = myDriver.getUtility().saveScreen(xTDdata[k][0]);
 //													xTDdata[k][10] = nameimg;
-//													xTDdata[k][11] = "���ͧ�ҡ ʶҹ�������� ���ç������͹�";
+//													xTDdata[k][11] = "เนื่องจาก สถานที่ที่ค้นหา ไม่ตรงตามเงื่อนไข";
 												}else {
 													xTSdata[j][9] = vError;
 
 													xTDdata[k][7] = vResult;
 													xTDdata[k][8] = "Fail";
+
+													System.out.println("-------------------------------------");
+													System.out.println("Expected Result : " + xTDdata[k][6]);
+													System.out.println("Actual Result : " + vResult);
+													System.out.println("Fail!!!");
+													System.out.println("-------------------------------------");
+													
 													xTDdata[k][9] = vError;
 													
 													String nameimg = myDriver.getUtility().saveScreen(xTDdata[k][0]);
 													xTDdata[k][10] = nameimg;
-													xTDdata[k][11] = "���ͧ�ҡ �óշ��ͺ����Ѻ��÷��ͺ���ç�Ѻ���Ѿ����Ҵ���";
+													xTDdata[k][11] = "เนื่องจาก กรณีทดสอบสำหรับการทดสอบไม่ตรงกับผลลัพธ์ที่คาดไว้";
 												}
 										}else {
 											xTSdata[j][9] = vError;
 
 											xTDdata[k][7] = vResult;
 											xTDdata[k][8] = "Fail";
+
+											System.out.println("-------------------------------------");
+											System.out.println("Expected Result : " + xTDdata[k][6]);
+											System.out.println("Actual Result : " + vResult);
+											System.out.println("Fail!!!");
+											System.out.println("-------------------------------------");
+											
 											xTDdata[k][9] = vError;
 											
 											String nameimg = myDriver.getUtility().saveScreen(xTDdata[k][0]);
 											xTDdata[k][10] = nameimg;
-											xTDdata[k][11] = "���ͧ�ҡ �óշ��ͺ����Ѻ��÷��ͺ���ç�Ѻ���Ѿ����Ҵ���";
+											xTDdata[k][11] = "เนื่องจาก กรณีทดสอบสำหรับการทดสอบไม่ตรงกับผลลัพธ์ที่คาดไว้";
 										}
 											
 									}
@@ -172,16 +221,23 @@ public class StartUp {
 	                			
 	                			xTDdata[k][7] = vResult;
 								xTDdata[k][8] = "Fail";
+								
+								System.out.println("-------------------------------------");
+								System.out.println("Actual Result : " + vResult);
+								System.out.println("Fail!!!");
+								System.out.println("Error!!!");
+								System.out.println("-------------------------------------");
+								
 								xTDdata[k][9] = vError;
 	                			
 	                			String nameimg = myDriver.getUtility().saveScreen(xTDdata[k][0]);
 								xTDdata[k][10] = nameimg;
-		        				xTDdata[k][11] = "���ͧ�ҡ �óշ��ͺ����Ѻ��÷��ͺ�Դ��ͼԴ��Ҵ";
+		        				xTDdata[k][11] = "เนื่องจาก กรณีทดสอบสำหรับการทดสอบเกิดข้อผิดพลาด";
 						    }
 				        }
 					}catch(Exception e) {}
 				   }
-				xTCdata[i][5] = vflag;							
+				xTCdata[i][6] = vflag;							
 			}
 					System.out.println("End Run Java Application : " + (xTDdata.length-1) + " Round" + " Round : " + k);
 		}	

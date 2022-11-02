@@ -1,8 +1,8 @@
-package TC02_Mobile;
+package TC03_Mobile;
 
 public class StartUp {
 	
-	public static String vOpenApp, vGender, vIdCard, vFirstname, vLastname, vBirthday, vAddress, vTel, vCareer, vEmail, vPassword, vConfirmPassword;
+	public static String vOpenApp, vIdCard, vPassword;
 	public static String vResult, vError, vflag; 
 	public static String xTDdata[][];
 	
@@ -10,12 +10,12 @@ public class StartUp {
 		
 		String xTSdata[][]; 
 		String xTCdata[][]; 
-		String vKeyword, vIP1, vIP2, vIP3, vIP4, vIP5, vIP6;
+		String vKeyword, vIP1, vIP2;
 		
-		String xlPath_tc = "C:/Users/Asus/Desktop/Project_Test/TC02_Register-By-Donor/Documents/TC02_Register-By-Donor_Result.xlsx";
-		String xlPath_ts = "C:/Users/Asus/Desktop/Project_Test/TC02_Register-By-Donor/Documents/TS02_Register-By-Donor_Result.xlsx";
-		String xlPath_td = "C:/Users/Asus/Desktop/Project_Test/TC02_Register-By-Donor/Documents/TD02_Register-By-Donor_Result.xlsx";
-	    String xlPath = "C:/Users/Asus/Desktop/Project_Test/TC02_Register-By-Donor/Documents/TC02_Register-By-Donor_Data.xlsx";
+		String xlPath_tc = "C:/Users/Asus/Desktop/Project_Test/TC03_Login-By-Donor/Documents/TC03_Login-By-Donor_Result.xlsx";
+		String xlPath_ts = "C:/Users/Asus/Desktop/Project_Test/TC03_Login-By-Donor/Documents/TS03_Login-By-Donor_Result.xlsx";
+		String xlPath_td = "C:/Users/Asus/Desktop/Project_Test/TC03_Login-By-Donor/Documents/TD03_Login-By-Donor_Result.xlsx";
+	    String xlPath = "C:/Users/Asus/Desktop/Project_Test/TC03_Login-By-Donor/Documents/TC03_Login-By-Donor_Data.xlsx";
 
 		Driver myDriver = new Driver();
 		
@@ -40,73 +40,70 @@ public class StartUp {
 							vKeyword = xTSdata[j][4];
 							vIP1 = xTSdata[j][5];
 							vIP2 = xTSdata[j][6];
-							vIP3 = xTSdata[j][7];
-							vIP4 = xTSdata[j][8];
-							vIP5 = xTSdata[j][9];
-							vIP6 = xTSdata[j][10];
-							System.out.println("---" + vKeyword + "````" + vIP1 + "````" + vIP2 + "````" + vIP3);
-							System.out.println("````" + vIP4 + "````" + vIP5 + "````" + vIP6);
+							System.out.println("---" + vKeyword + "````" + vIP1 + "````" + vIP2);
 							vResult = "Pass";
 	                		vError = "No Error";
 	                		
-	                		vResult = myDriver.keyword_executor(vKeyword, vIP1, vIP2, vIP3, vIP4, vIP5, vIP6);
+	                		vResult = myDriver.keyword_executor(vKeyword, vIP1, vIP2);
 	                		
 	                		if(vResult.equalsIgnoreCase("Pass")) {
-	                			xTSdata[j][11] = "Pass";
+	                			xTSdata[j][8] = "Pass";
 	                		}else if(vResult.equalsIgnoreCase("Fail")) {
-	                			xTSdata[j][11] = "Fail";
+	                			xTSdata[j][8] = "Fail";
 	                		}else {
 	                			//get text
 	                			if(vKeyword.equals("get_text")) {
 	                				
 	                				System.out.println("Expected Result : " + vResult.toString());
-	                				System.out.println("Actual Result : " + xTDdata[k][15].toString());
-	                				System.out.println(" == " + vResult.toString().equals(xTDdata[k][15].toString()));
+	                				System.out.println("Actual Result : " + xTDdata[k][6].toString());
+	                				System.out.println(" == " + vResult.toString().equals(xTDdata[k][6].toString()));
 	                				
-	                				if(vResult.toString().equals(xTDdata[k][15].toString())) {
-	                					xTSdata[j][12] = vError;
-	                					xTDdata[k][16] = vResult;
-	                					xTDdata[k][17] = "Pass";
+	                				if(vResult.toString().equals(xTDdata[k][6].toString())) {
+	                					xTSdata[j][9] = vError;
+	                					
+	                					xTDdata[k][7] = vResult;
+	                					xTDdata[k][8] = "Pass";
 	                					
 	                					System.out.println("-------------------------------------");
-	                					System.out.println("Expected Result : " + xTDdata[k][15]);
+	                					System.out.println("Expected Result : " + xTDdata[k][6]);
 	                					System.out.println("Actual Result : " + vResult);
 	                					System.out.println("Pass!!!");
 	                					System.out.println("-------------------------------------");
 	                					
-	                					xTDdata[k][18] = vError;
-	                					xTDdata[k][19] = "-";
-	                					xTDdata[k][20] = "-";
+	                					xTDdata[k][9] = vError;
+	                					xTDdata[k][10] = "-";
+	                					xTDdata[k][11] = "-";
 	                					
 	                				}else {
-	                					xTSdata[j][12] = vError;
-	                					xTDdata[k][16] = vResult;
-	                					xTDdata[k][17] = "Fail";
+	                					xTSdata[j][9] = vError;
+	                					xTDdata[k][7] = vResult;
+	                					xTDdata[k][8] = "Fail";
 	                					
 	                					System.out.println("-------------------------------------");
-	                					System.out.println("Expected Result : " + xTDdata[k][15]);
+	                					System.out.println("Expected Result : " + xTDdata[k][6]);
 	                					System.out.println("Actual Result : " + vResult);
 	                					System.out.println("Fail!!!");
 	                					System.out.println("-------------------------------------");
 	                					
-	                					xTDdata[k][18] = vError;
+	                					xTDdata[k][9] = vError;
 	                					String nameimg = myDriver.getUtility().saveScreen(xTDdata[k][0]);
-	                					xTDdata[k][19] = nameimg;
-	                					xTDdata[k][20] = "เนื่องจาก กรณีทดสอบสำหรับการทดสอบไม่ตรงกับผลลัพธ์ที่คาดไว้";
+	                					xTDdata[k][10] = nameimg;
+	                					xTDdata[k][11] = "เนื่องจาก กรณีทดสอบสำหรับการทดสอบไม่ตรงกับผลลัพธ์ที่คาดไว้";
 	                					
 	                				}
 	                				
 	                			}
+	                			
 	                		}
 	               
 	                		if (!vError.equals("No Error")){
 	                			vflag = "Fail";
 	                			
-	                			xTSdata[k][11] = vflag;
-	                			xTSdata[k][12] = vError;
+	                			xTSdata[k][8] = vflag;
+	                			xTSdata[k][9] = vError;
 	                			
-	                			xTDdata[k][16] = vResult;
-								xTDdata[k][17] = "Fail";
+	                			xTDdata[k][7] = vResult;
+								xTDdata[k][8] = "Fail";
 								
 								System.out.println("-------------------------------------");
 								System.out.println("Actual Result : " + vResult);
@@ -114,11 +111,11 @@ public class StartUp {
 								System.out.println("Error!!!");
 								System.out.println("-------------------------------------");
 								
-								xTDdata[k][18] = vError;
+								xTDdata[k][9] = vError;
 	                			
 	                			String nameimg = myDriver.getUtility().saveScreen(xTDdata[k][0]);
-								xTDdata[k][19] = nameimg;
-		        				xTDdata[k][20] = "เนื่องจาก กรณีทดสอบสำหรับการทดสอบเกิดข้อผิดพลาด";
+								xTDdata[k][10] = nameimg;
+		        				xTDdata[k][11] = "เนื่องจาก กรณีทดสอบสำหรับการทดสอบเกิดข้อผิดพลาด";
 						    }
 				        }
 					}catch(Exception e) {}
@@ -133,7 +130,7 @@ public class StartUp {
 	  }		
     }
 		System.out.println("Run Java Application Seccess!!!");
-  }		
+  }
 }
 
 

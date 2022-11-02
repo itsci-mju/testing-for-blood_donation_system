@@ -1,4 +1,4 @@
-package TC01_Mobile;
+package TC03_Mobile;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -18,7 +18,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 
 public class Utility {
-	AndroidDriver<MobileElement> driver = null;
+	private AndroidDriver<MobileElement> driver = null;
 	
 	public void application_open(String fURL) throws InterruptedException, MalformedURLException {
 		if (fURL == null){
@@ -53,72 +53,69 @@ public class Utility {
 		
 	}
 	
-	public String get_text(String id) {
-		String text = "";
-		text = driver.findElementById(id).getText();
-		System.out.println("get text : " + text);
-		return 	driver.findElement(By.id(id)).getText();
-		
-//		String txt1 = "";
-//		String txt2 = "";
-//		txt1 = driver.findElementById(id1).getText();
-//		txt2 = driver.findElementById(id2).getText();
-//		if(txt1 == null) {
-//			System.out.println("txt1 : " + txt1);
-//			return 	driver.findElement(By.id(id1)).getText();
-//			
-//		}else {
-//			System.out.println("txt1 : " + txt2);
-//			return 	driver.findElement(By.id(id2)).getText();
-//			
-//		}
+	public String get_text(String id, String id2) {
+		try {
+			//		String text1 = driver.findElementById(id).getText();
+			//		String text2 = driver.findElementById(id2).getText();
+			
+					String g_text1 = "";
+					String text1 = "";
+					String text2 = "";
+					
+					text1 = driver.findElementById(id).getText();
+					System.out.println("text1 = " + text1);
+					
+					text2 = driver.findElementById(id2).getText();
+					System.out.println("text2 = " + text2);
+					
+					if(" ".equals(text2)) {
+						g_text1 =  text1;
+					}else {
+						g_text1 =  text1 + " " + text2;
+					}
+					
+					System.out.println("g_text1 = " + g_text1);	
+					return g_text1;
+					
+				}catch(Exception e){
+					
+					System.out.println(e);	
+					return null;
+				}
 		
 	}
 	
-	public void keyword_search(String id, String fText) {
+	public void input_idcard(String id, String fText) {
 		driver.findElement(By.id(id)).clear();
 		driver.findElement(By.id(id)).sendKeys(fText);
 		}
-
-	public void type_search(String xpath, String fText) { 
-		List <MobileElement> type_search = driver.findElements(By.xpath(xpath));
-		if(fText.equals("วันที่")) {
-			type_search.get(0).click();
-		}else if(fText.equals("สถานที่")){
-			type_search.get(1).click();
-		}else {
-			type_search.get(0).click();
-		}
-//		for(MobileElement ts : type_search) {
-//			System.out.println( "type_search : " + ts.getText());
-//			if(ts.getText().equals(fText)) {
-//				ts.click();
-//				break;
-//			}else {
-//				ts.click();
-//			}
-//		}
-	}
+	
+	public void input_password(String id, String fText) {
+		driver.findElement(By.id(id)).clear();
+		driver.findElement(By.id(id)).sendKeys(fText);
+		} 
 	
 	public void button_click(String id) {
 		driver.findElement(By.id(id)).click();
 	}
 	
-	  public void application_close() {
-		  //Thread.sleep(1000);
-		  //driver.quit();//จบการทำงาน
-		  driver.close();
-		  //driver.closeApp();
+	public void application_close() {
+		//Thread.sleep(1000);
+		//driver.quit();//จบการทำงาน
+		driver.close();
+		//driver.closeApp();
 	}
-	  public String saveScreen(String index) {
-		 String nameimg = "";
-		 File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		 try {
-			FileUtils.copyFile(scrFile, new File("C:\\Users\\Asus\\Desktop\\Project_Test\\TC01_Search-Activity-Donation\\Img\\" + "" + index + ".png"));
+	
+	public String saveScreen(String index) {
+		String nameimg = "";
+		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(scrFile, new File("C:\\Users\\Asus\\Desktop\\Project_Test\\TC03_Login-By-Donor\\Img\\" + "" + index + ".png"));
 			nameimg = index;
-		 } catch (IOException e) {
-			e.printStackTrace();
-		}
-		 return nameimg;
+			} catch (IOException e) {
+				e.printStackTrace();
+				}
+		return nameimg;
+		
 	}
 }	  

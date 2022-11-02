@@ -1,4 +1,4 @@
-package TC01_Mobile;
+package TC03_Mobile;
 
 import java.util.NoSuchElementException;
 
@@ -11,7 +11,7 @@ public class Driver {
 		return util;
 	}
 
-	public String keyword_executor(String vKeyword, String vIP1, String vIP2, String vIP3) throws Exception {
+	public String keyword_executor(String vKeyword, String vIP1, String vIP2) throws Exception {
 		
 		String flag = "false";
 	
@@ -21,46 +21,29 @@ public class Driver {
 		    flag = "True";
 		    return "pass";
 		}
-		if (vKeyword.equals("type_search")){
-			util.type_search(getIP(vIP1), getIP(vIP2));
+		if (vKeyword.equals("input_idcard")){
+			util.input_idcard(getIP(vIP1), getIP(vIP2));
 			flag = "True";
 		    return "pass";
 		}
-		if (vKeyword.equals("keyword_search")){
-			util.keyword_search(getIP(vIP1), getIP(vIP2));
+		if (vKeyword.equals("input_password")){
+			util.input_password(getIP(vIP1), getIP(vIP2));
 			flag = "True";
 		    return "pass";
 		}
+//		try {
 		if (vKeyword.equals("get_text")){
-			String type_search = StartUp.vTypeSearch;
-			System.out.println("vTypeSearch : " + type_search);
-			
-			if(type_search.equals("วันที่")||type_search.equals("")) {
-				try {
-					String txt = util.get_text(getIP(vIP1));
-					flag = "True";
-					return txt;
-				
-				}catch(Exception e) {
-					String txt = util.get_text(getIP(vIP3));
-					flag = "True";
-					return txt;
-					}
-			}
-			if(type_search.equals("สถานที่")) {
-				try {
-					
-					String txt = util.get_text(getIP(vIP2));
-					flag = "True";
-					return txt;
-
-				}catch(Exception e) {
-					String txt = util.get_text(getIP(vIP3));
-					flag = "True";
-					return txt;
-				}
-			}
+			String txt = util.get_text(getIP(vIP1),getIP(vIP2));
+			flag = "True";
+		    return txt;
 		}
+//		}catch (Exception e) {
+//			if (vKeyword.equals("get_text")){
+//				String txt = util.get_text(getIP(vIP2));
+//				flag = "True";
+//			    return txt;
+//			}
+//		}
 		if (vKeyword.equals("button_click")){
 			util.button_click(getIP(vIP1));
 			flag = "True";
@@ -77,7 +60,8 @@ public class Driver {
 			StartUp.vError = "Error";		
 			return "False-Keyword Missing";
 		  }
-    	}catch (NoSuchElementException e){
+    	}
+		catch (NoSuchElementException e){
 			System.out.println("Error is " + e);
 			StartUp.vError = String.valueOf(e);
 			
@@ -91,11 +75,11 @@ public class Driver {
 		if (vIP.equals("vOpenApp")){
 			vIP = StartUp.vOpenApp;
 		}
-		if (vIP.equals("vTypeSearch")){
-			vIP = StartUp.vTypeSearch;
+		if (vIP.equals("vIdCard")){
+			vIP = StartUp.vIdCard;
 		}
-		if (vIP.equals("vKeywordSearch")){
-			vIP = StartUp.vKeywordSearch;
+		if (vIP.equals("vPassword")){
+			vIP = StartUp.vPassword;
 		}
 	  return vIP;
 	}
@@ -103,7 +87,7 @@ public class Driver {
 	public void getData(int k) {
 		StartUp.vOpenApp = StartUp.xTDdata[k][2];
 		System.out.println(StartUp.xTDdata[k][2]);
-		StartUp.vTypeSearch = StartUp.xTDdata[k][4];
-		StartUp.vKeywordSearch = StartUp.xTDdata[k][5];
+		StartUp.vIdCard = StartUp.xTDdata[k][4];
+		StartUp.vPassword = StartUp.xTDdata[k][5];
 	}
 }

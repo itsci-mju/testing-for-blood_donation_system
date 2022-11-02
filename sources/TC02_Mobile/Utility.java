@@ -60,29 +60,34 @@ public class Utility {
 	
 	public String get_text(String id, String id2) {
 		
-//		String text1 = driver.findElementById(id).getText();
-//		String text2 = driver.findElementById(id2).getText();
-
-		String g_text1 = "";
-		String g_text2 = "";
-		String text1 = "";
-		String text2 = "";
-		
 		try {
-				text2 = driver.findElementById(id2).getText();
-				
-			}catch(Exception e) {
-				text1 = driver.findElementById(id).getText();
-				g_text1 = "" + text1;
-				System.out.println(g_text1);
-				
-				return g_text1;
-			}
-				text1 = driver.findElementById(id).getText();
-				g_text2 = "" + text1 + " " + "" + text2;
-				System.out.println(g_text2);
-				
-				return g_text2;
+			//		String text1 = driver.findElementById(id).getText();
+			//		String text2 = driver.findElementById(id2).getText();
+			
+					String g_text1 = "";
+					String text1 = "";
+					String text2 = "";
+					
+					text1 = driver.findElementById(id).getText();
+					System.out.println("text1 = " + text1);
+					
+					text2 = driver.findElementById(id2).getText();
+					System.out.println("text2 = " + text2);
+					
+					if(" ".equals(text2)) {
+						g_text1 =  text1;
+					}else {
+						g_text1 =  text1 + " " + text2;
+					}
+					
+					System.out.println("g_text1 = " + g_text1);	
+					return g_text1;
+					
+				}catch(Exception e){
+					
+					System.out.println(e);	
+					return null;
+				}
 	}
 	
 	public void input_idcard(String id, String fText) {
@@ -272,7 +277,7 @@ public class Utility {
 		String nameimg = "";
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		try {
-			FileUtils.copyFile(scrFile, new File("C:\\Users\\Asus\\Desktop\\Project_Test\\TC02_Register-By-Donor\\" + "" + index + ".png"));
+			FileUtils.copyFile(scrFile, new File("C:\\Users\\Asus\\Desktop\\Project_Test\\TC02_Register-By-Donor\\Img\\" + "" + index + ".png"));
 			nameimg = index;
 			} catch (IOException e) {
 				e.printStackTrace();
